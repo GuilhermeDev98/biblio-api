@@ -3,7 +3,6 @@ const HasPemission = require("../utils/HasPemission");
 
 module.exports = {
   async store(req, res) {
-    HasPemission("role_store", req);
-    res.json(req);
+    return res.json({ error: { message: "in contruction !" } });
   }
 };

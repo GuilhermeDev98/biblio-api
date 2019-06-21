@@ -6,7 +6,9 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     dialect: "mariadb",
-    dialectOptions: { connectTimeout: 1000 } // mariadb connector option
+    dialectOptions: {
+      connectTimeout: 1000
+    }
   }
 );
 

@@ -1,13 +1,35 @@
 const Permission = require("../../src/models/Permission");
 
-Permission.create({
-  name: "role_store",
-  description: "create role",
-  roleId: 2
-});
+// const models = ["role", "permission", "user", "book", "loan"];
+// const methods = [
+//   "index",
+//   "create",
+//   "store",
+//   "show",
+//   "edit",
+//   "update",
+//   "delete"
+// ];
+const roleId = 2;
+
+// models.map(async model => {
+//   methods.map(async method => {
+//     await Permission.create({
+//       name: `${method}_${model}`,
+//       description: `${method} ${model}`,
+//       roleId
+//     });
+//   });
+// });
+
+// Permission.create({
+//   name: "giveback_loan",
+//   description: "giveback loan",
+//   roleId
+// });
 
 Permission.create({
-  name: "permission_store",
-  description: "create permission",
-  roleId: 2
+  name: "toextend_loan",
+  description: "to extend loan",
+  roleId
 });

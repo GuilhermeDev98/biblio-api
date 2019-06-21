@@ -14,16 +14,16 @@ sequelize.query("SET FOREIGN_KEY_CHECKS = 0").then(() => {
   // RoleMigration.down().then(() => {
   //   RoleMigration.up();
   // });
-  PermissionMigration.down().then(() => {
-    PermissionMigration.up();
-  });
-  // UserMigration.down().then(() => {
-  //   UserMigration.up();
+  // PermissionMigration.down().then(() => {
+  //   PermissionMigration.up();
   // });
+  UserMigration.down().then(() => {
+    UserMigration.up();
+  });
   // BookMigration.down().then(() => {
   //   BookMigration.up();
   // });
-  // LoanMigration.down().then(() => {
-  //   LoanMigration.up();
-  // });
+  LoanMigration.down().then(() => {
+    LoanMigration.up();
+  });
 });

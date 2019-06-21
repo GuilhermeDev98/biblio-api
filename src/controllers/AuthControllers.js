@@ -28,7 +28,6 @@ module.exports = {
               }
             });
           }
-          console.log(user.role);
           const passwordCompared = bcrypt.compareSync(password, user.password);
           if (passwordCompared) {
             const token = jwt.sign(

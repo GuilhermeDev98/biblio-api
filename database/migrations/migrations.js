@@ -11,12 +11,12 @@ const BookMigration = require("./BookMigration");
 const LoanMigration = require("./LoanMigration");
 
 sequelize.query("SET FOREIGN_KEY_CHECKS = 0").then(() => {
-  RoleMigration.down().then(() => {
-    RoleMigration.up();
-  });
-  // PermissionMigration.down().then(() => {
-  //   PermissionMigration.up();
+  // RoleMigration.down().then(() => {
+  //   RoleMigration.up();
   // });
+  PermissionMigration.down().then(() => {
+    PermissionMigration.up();
+  });
   // UserMigration.down().then(() => {
   //   UserMigration.up();
   // });

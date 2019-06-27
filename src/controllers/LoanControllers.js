@@ -14,7 +14,7 @@ module.exports = {
         (await HasRole("biblio", req.user))
       ) {
         const loans = await Loan.findAll({
-          where: { userId: req.params.user_id, returned_in: null },
+          where: { userId: req.params.user_id, returnDate: null},
           include: [User, Book]
         });
         return res.json(loans);
@@ -27,11 +27,11 @@ module.exports = {
         (await HasRole("admin", req.user)) ||
         (await HasRole("biblio", req.user))
       ) {
-        const loans = await Loan.findAll({where: { returned_in: null }, include: [User, Book] });
+        const loans = await Loan.findAll({where: { returnDate: null }, include: [User, Book] });
         return res.json(loans);
       } else {
         const loans = await Loan.findAll({
-          where: { userId: req.params.user_id, returned_in: null },
+          where: { userId: req.params.user_id, returnDate: null },
           include: [User, Book]
         });
         return res.json(loans);

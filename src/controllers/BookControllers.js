@@ -1,5 +1,6 @@
 const HasPemission = require("../utils/HasPemission");
 const Book = require("../models/Book");
+const up = require("../config/upload");
 
 module.exports = {
   async index(req, res) {
@@ -11,9 +12,9 @@ module.exports = {
   },
   async store(req, res) {
     if (await HasPemission("store_book", req.user)) {
-      req.body.cover = `/uploads/${req.file.filename}`;
+      const image = await up.uploader.upload(req.file.path);
+      req.body.cover = image.secure_url;
       const book = await Book.create(req.body);
-      console.log(req.body);
       return res.status(201).json(book);
     }
     return res.status(401).json({ error: { message: "you shall not pass !" } });

@@ -26,36 +26,18 @@ User.init(
     },
     phone: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
-    },
-    points: {
-      type: Sequelize.INTEGER,
-      default: 0
-    },
-    pointsReazon: {
-      type: Sequelize.STRING
     },
     blocked: {
       type: Sequelize.BOOLEAN,
       defaultValue: false
     },
-    coins: {
-      type: Sequelize.INTEGER,
-      defaultValue: 1
-    },
-    coinsReazon: {
-      type: Sequelize.STRING
-    }
   },
   {
     hooks: {
       beforeCreate: user => {
         user.password = bcrypt.hashSync(user.password, 10);
-        user.points = 100;
-        user.pointsReazon = "Bem Vindx";
-        user.points = 1;
-        user.coinsReazon = "Cadastro";
         user.roleId = user.roleId || 1;
       }
     },

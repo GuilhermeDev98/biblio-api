@@ -6,14 +6,18 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   async register(req, res) {
     const { username, name, email, password, phone } = req.body;
-    const user = await User.create({
+
+    const user = User.create({
       username,
       name,
       email,
       password,
       phone
     });
-    res.json(user);
+
+    user.then(() => {
+      res.json(user);
+    }).catch(err => res.json(err))
   },
 
   async login(req, res) {

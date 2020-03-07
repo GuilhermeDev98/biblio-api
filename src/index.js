@@ -4,7 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const port = process.env.PORT;
+const port = process.env.APP_PORT;
+const version = process.env.APP_VERSION;
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/files", express.static(path.resolve(__dirname, "..", "uploads")));
 
-app.use(require("./router"));
+app.use(`/api/${version}/`, require("./router"));
 
 app.listen(port, () => {
   console.log(`App Rodando na porta ${port}`);

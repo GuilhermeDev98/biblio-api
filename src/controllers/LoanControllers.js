@@ -8,35 +8,15 @@ const Loan = require("../models/Loan");
 
 module.exports = {
   async index(req, res) {
-    if (req.params.user_id) {
-      if (
-        (await HasRole("admin", req.user)) ||
-        (await HasRole("biblio", req.user))
-      ) {
-        const loans = await Loan.findAll({
-          where: { userId: req.params.user_id, returnedIn: null },
-          include: [User, Book]
-        });
-        return res.json(loans);
-      }
-      return res
-        .status(401)
-        .json({ error: { message: "you shall not pass !" } });
-    } else {
-      if (
-        (await HasRole("admin", req.user)) ||
-        (await HasRole("biblio", req.user))
-      ) {
-        const loans = await Loan.findAll({where: {returnedIn: null}, include: [User, Book] });
-        return res.json(loans);
-      } else {
-        const loans = await Loan.findAll({
-          where: { userId: req.params.user_id, returnedIn: null },
-          include: [User, Book]
-        });
-        return res.json(loans);
-      }
+    if (
+      (await HasRole("admin", req.user)) ||
+      (await HasRole("librarian", req.user))
+    ) {
+      const loans = await Loan.findAll({where: {returnedIn: null}, include: [User, Book] });
+      return res.json(loans);
     }
+
+    return res.status(401).json({ error: { message: "unauthorized" } });
   },
   async store(req, res) {
     if (!req.body.bookId) {
@@ -63,7 +43,7 @@ module.exports = {
       return res.status(200).json(loan);
     }
 
-    return res.status(401).json({ error: { message: "you shall not pass !" } });
+    return res.status(401).json({ error: { message: "unauthorized" } });
   },
   async toExtend(req, res) {
     if (await HasPemission("toextend_loan", req.user)) {
@@ -82,6 +62,6 @@ module.exports = {
       await loan.set({ returnDate }).save();
       return res.status(200).json(loan);
     }
-    return res.status(401).json({ error: { message: "you shall not pass !" } });
+    return res.status(401).json({ error: { message: "unauthorized" } });
   }
 };

@@ -1,7 +1,7 @@
 const User = require("../../src/models/User");
 
-User.create({
-  username: "GuilhermeDev",
+module.exports = User.create({
+  username: "guilhermedev",
   name: "Guilherme Santos",
   email: "guilhermedev@hotmail.com",
   password: "secret",

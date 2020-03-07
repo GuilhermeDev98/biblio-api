@@ -26,4 +26,6 @@ sequelize.query("SET FOREIGN_KEY_CHECKS = 0").then(() => {
   LoanMigration.down().then(() => {
     LoanMigration.up();
   });
+}).then(() => {
+
 });

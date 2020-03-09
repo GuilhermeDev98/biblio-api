@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const port = process.env.APP_PORT;
+const port = process.env.PORT;
 const version = process.env.APP_VERSION;
 
 const app = express();

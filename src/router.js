@@ -28,19 +28,15 @@ const UserController = require("./controllers/UserControllers");
 route.post("/auth/register", AuthControllers.register);
 route.post("/auth/login", AuthControllers.login);
 
+route.get("/users", [JwtCheck], UserController.index);
 route.get("/users/me", [JwtCheck], UserController.me);
 route.get("/users/loans", [JwtCheck], UserController.loans);
-
 
 route.get("/books", [JwtCheck], BookControllers.index);
 route.post("/books", [JwtCheck, upload.single("cover")], BookControllers.store);
 route.put("/books/:id", [JwtCheck], BookControllers.update);
 route.delete("/books/:id", [JwtCheck], BookControllers.destroy);
 
-/* 
-  Alterar a rota /loans/:user_id para /users/loans/
-  e criar a rota route.get("/loans", [JwtCheck], LoanControllers.index); onde trará todos os livros emprestados.
-*/
 route.get("/loans", [JwtCheck], LoanControllers.index);
 route.post("/loans", [JwtCheck], LoanControllers.store);
 route.put("/loans/:id/giveback", [JwtCheck], LoanControllers.giveBack);
@@ -56,6 +52,9 @@ route.post("/permissions", [JwtCheck], PermissionController.store);
 route.put("/permissions/:id", [JwtCheck], PermissionController.update);
 route.delete("/permissions/:id", [JwtCheck], PermissionController.destroy);
 
+/* 
+futuramente implementar uma função Resource onde retorne todos 
+*/
 /* Resource('users', UserController, route) */
 
 

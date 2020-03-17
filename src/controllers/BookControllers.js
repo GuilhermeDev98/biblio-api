@@ -10,6 +10,16 @@ module.exports = {
     }
     return res.status(401).json({ error: { message: "you shall not pass !" } });
   },
+  async show(req, res) {
+    if (req.params.id) {
+      const book = await Book.findByPk(req.params.id);
+      return res.json(book);
+    }
+
+    return res
+      .status(401)
+      .json({ error: { field: "id", message: "Id Do Livro é Obrigatório !" } });
+  },
   async store(req, res) {
     if (await HasPemission("store_book", req.user)) {
       const image = await up.uploader.upload(req.file.path);

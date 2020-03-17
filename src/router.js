@@ -24,7 +24,6 @@ const RoleController = require("./controllers/RoleController");
 const PermissionController = require("./controllers/PermissionController");
 const UserController = require("./controllers/UserControllers");
 
-
 route.post("/auth/register", AuthControllers.register);
 route.post("/auth/login", AuthControllers.login);
 
@@ -33,6 +32,7 @@ route.get("/users/me", [JwtCheck], UserController.me);
 route.get("/users/loans", [JwtCheck], UserController.loans);
 
 route.get("/books", [JwtCheck], BookControllers.index);
+route.get("/books/:id", [JwtCheck], BookControllers.show);
 route.post("/books", [JwtCheck, upload.single("cover")], BookControllers.store);
 route.put("/books/:id", [JwtCheck], BookControllers.update);
 route.delete("/books/:id", [JwtCheck], BookControllers.destroy);
@@ -56,6 +56,5 @@ route.delete("/permissions/:id", [JwtCheck], PermissionController.destroy);
 futuramente implementar uma função Resource onde retorne todos 
 */
 /* Resource('users', UserController, route) */
-
 
 module.exports = route;
